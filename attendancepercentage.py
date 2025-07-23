@@ -16,15 +16,25 @@ def cal_percentage(num_workdays, num_period, num_misseddays, num_periodsmissed):
         needed_days = round(needed_periods/num_period, 2)
         print(f"you need to attend {needed_days} more days to rise your attendance above 75%")
     return attended_percentage
-    
 
 def main():
-    num_workdays = int(input("enter the number of working days: "))
-    num_period = int(input("enter the number of periods per day: "))
-    num_misseddays = int(input("enter the number of missed full days: "))
-    num_periodsmissed = int(input("enter the number of periods missed(don't include the full days): "))
-    cal_percentage(num_workdays, num_period, num_misseddays, num_periodsmissed)
-
+    while True:
+        try:
+            print("-----------ATTENDANCE CALCULATION-----------")
+            num_workdays = int(input("enter the number of working days: "))
+            num_period = int(input("enter the number of periods per day: "))
+            num_misseddays = int(input("enter the number of missed full days: "))
+            num_periodsmissed = int(input("enter the number of periods missed(excluding the full days): "))
+            if any(val < 0 for val in [num_workdays, num_period, num_misseddays, num_periodsmissed]):
+                print("Working days and periods can't be negative.\nPlease re-enter positive values(enter 0 if none). ")
+                continue
+            print("\n--------------ATTENDANCE STATUS--------------")
+            cal_percentage(num_workdays, num_period, num_misseddays, num_periodsmissed)
+            print("---------------------------------------------\n")
+            break
+        except ValueError:
+            print("\nInvalid input.please enter integer values.\n")
+    
 main()
     
 
